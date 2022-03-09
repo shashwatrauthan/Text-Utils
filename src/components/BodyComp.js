@@ -46,18 +46,6 @@ export default function BodyComp(props) {
 
     }
 
-    function countWords(val)
-    {
-        if(val==="")
-        { 
-            return 0;
-        }
-        else
-        {
-            return val.split(" ").length;
-        }
-    }
-
 
 
 
@@ -70,17 +58,17 @@ export default function BodyComp(props) {
                     <h3 className='mt-4' style={{color: props.mode==="dark"?"white":"#343a40"}}>Enter the text here:</h3>
                     <Form.Control as="textarea" value={text} placeholder="Enter your text here" rows={6} onChange={handleOnChange}/>
                 </Form.Group>
-                <Button className='me-2' variant="primary" onClick={convertUp}>Convert to Uppercase</Button>
-                <Button className='me-2' variant="primary" onClick={convertLo}>Convert to Lowercase</Button>
-                <Button className='me-2' variant="primary" onClick={removeSpace}>Remove extra space</Button>
-                <Button className='me-2' variant="primary" onClick={copyClip}>Copy to Clipboard</Button>
-                <Button className='me-2' variant="primary" onClick={clearText}>Clear</Button>
+                <Button disabled={text.length===0} className='me-2 mb-1' variant="primary" onClick={convertUp}>Convert to Uppercase</Button>
+                <Button disabled={text.length===0} className='me-2 mb-1' variant="primary" onClick={convertLo}>Convert to Lowercase</Button>
+                <Button disabled={text.length===0} className='me-2 mb-1' variant="primary" onClick={removeSpace}>Remove extra space</Button>
+                <Button disabled={text.length===0} className='me-2 mb-1' variant="primary" onClick={copyClip}>Copy to Clipboard</Button>
+                <Button disabled={text.length===0} className='me-2 mb-1' variant="primary" onClick={clearText}>Clear</Button>
             </Form>
             
             <div className="container mt-4" style={{color: props.mode==="dark"?"white":"#343a40"}}>
                 <hr />
                 <h3>Summary:</h3>
-                <p>{countWords(text)} words, {text.length} characters</p>
+                <p>{text.split(/\s+/).filter((element)=>{return element.length !== 0}).length} words, {text.length} characters</p>
             </div>
         </div>
 
